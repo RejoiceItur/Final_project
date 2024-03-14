@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-<!-- <a href="./product.html">Product Page</a> -->
-
 <html lang="en">
     <head>
         <meta charset="UTF-8">
