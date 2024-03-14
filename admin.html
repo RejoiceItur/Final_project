@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin Page</title>
+    <link rel="stylesheet" href="product.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="sticker">
+    <!-- <div class="navbar-1">
+      <div id="nav-left">
+       <a href="#">Sell on Pepperfry</a>   
+       <a href="#">Become a Franchisee</a>
+       <a href="#">Buy in Bulk</a>
+       <a href="#">Find a Studio</a>
+      </div>
+      <div href="#" id="nav-right">
+       <a href="#">Enter pincode
+           <img id="edit_1" src="https://img.icons8.com/external-anggara-basic-outline-anggara-putra/24/external-edit-basic-ui-anggara-basic-outline-anggara-putra.png" alt="">
+       </a>
+       <a href="#">Find Pepperfry Studio</a>
+      </div>
+   </div> -->
+  
+    <div class="nav-middle">
+      <div>
+        <a href="./index.html">
+          <img src="./images/logo new.png" alt="error">
+        </a>
+      </div>
+      <div id="searchbar">
+        <form>
+          <input type="text" placeholder="Your door to happiness opens with a search" id="search">
+          <img src="https://img.icons8.com/ios-glyphs/30/search--v1.png" alt="error">
+        </form>
+      </div>
+      <div id="images">
+        <a href="#"><img
+            src="https://img.icons8.com/external-vectorslab-flat-vectorslab/53/external-Help-Chat-customer-support-vectorslab-flat-vectorslab-2.png"
+            alt="error"></a>
+        <a href="./login.html"><img src="https://img.icons8.com/material-sharp/256/user.png" alt="error"></a>
+        <a href="#"><img src="https://img.icons8.com/ios/256/like.png" alt="error"></a>
+        <a href="./card.html"><img
+            src="https://img.icons8.com/external-smashingstocks-detailed-outline-smashing-stocks/256/external-Add-To-Cart-mobile-shopping-smashingstocks-detailed-outline-smashing-stocks-4.png"
+            alt="error"></a>
+      </div>
+    </div>
+  
+    <div class="navbar-2">
+      <a href="#">Furniture</a>
+      <a href="#">Home Decor</a>
+      <a href="#">Lamps & Lighting</a>
+      <a href="#">Kitchen & Dining</a>
+      <a href="#">Furnishings</a>
+      <a href="#">Mattresses</a>
+      <a href="#">Appliances</a>
+      <a href="#">Pets</a>
+      <a href="#">Modular</a>
+      <a href="#">Gift Cards</a>
+  </div>
+  </div>
+<div id="mainpage">
+    <div id="filter_1">
+      <h3>Add Product</h4>
+      <!-- <input type="text" id="id" placeholder="id"><br> -->
+      <input type="text" id="Name" class="inputfeild" placeholder="Name of Product">
+      <input type="text" id="category" class="inputfeild" placeholder="Product category">
+      <input type="text" id="img" class="inputfeild"placeholder="Image URL">
+      <input type="number" id="price" class="inputfeild" placeholder="Product Price">
+      <input type="number" id="discount" class="inputfeild" placeholder="Add discount">
+      <button id="Addbtn" class="crudbtn">Add Product</button> 
+        <hr>
+        <h3>Update Product</h3>
+       <input type="text" id="ID" class="inputfeild" placeholder="Product ID">
+       <input type="text" id="UpdateName" class="inputfeild" placeholder="Update Name"> 
+       <input type="text" id="Updatecategory" class="inputfeild" placeholder="Update category">
+        <input type="text" id="updateImg" class="inputfeild" placeholder="Update Image URL">
+        <input type="number" id="UpdatePrice" class="inputfeild" placeholder="Update Price">
+        <input type="number" id="updateDisc" class="inputfeild" placeholder="Update Discount">
+        <button id="Updatebtn" class="crudbtn">Update Product</button>
+        <hr> 
+        <!-- <a href="./card.html">Cart</a> -->
+       </div>
+       <div id="cardwraper">
+        
+            <!-- product should append here -->
+        </div>
+        
+        
+        
+</div>
+  
+</body>
+<script>
+   let api=`https://63f5b30259c944921f64b2be.mockapi.io/products`
+let name=document.getElementById("Name");
+let category=document.getElementById("category");
+let img=document.getElementById("img");
+let price=document.getElementById("price");
+let discount=document.getElementById("discount");
+let addproduct=document.getElementById("Addbtn")
+addproduct.addEventListener("click",(e)=>{
+  addData()
+})
+async function addData(){
+    try {
+        let obj={
+          name:name.value,
+          category:category.value,
+          img:img.value,
+          price:price.value,
+          discount:discount.value
+
+        }
+        let res= await fetch("https://63f5b30259c944921f64b2be.mockapi.io/products",{
+            method:"POST",
+            headers:{
+              'Content-Type' : 'application/json'
+            },
+            body:JSON.stringify(obj)
+        })
+        fetched()
+    } catch (error) {
+        console.log(error)
+    }
+}
+let updateId=document.getElementById("ID");
+let updatName=document.getElementById("UpdateName");
+let updateCategory=document.getElementById("Updatecategory");
+let updateImg=document.getElementById("updateImg")
+let updatePrice=document.getElementById("UpdatePrice");
+let updateDisc=document.getElementById("updateDisc");
+let updatebtn=document.getElementById("Updatebtn");
+updatebtn.addEventListener("click",()=>{
+    UpdateData()
+})
+async function UpdateData(){
+    try {
+        let obj={
+            id:updateId.value,
+            name:updatName.value,
+            category:updateCategory.value,
+            img:updateImg.value,
+            price:updatePrice.value,
+            discount:updateDisc.value
+        }
+        let res= await fetch(`${api}/${updateId.value}`,{
+            method:"PUT",
+            headers:{
+              'Content-Type' : 'application/json' 
+            },
+            body:JSON.stringify(obj)
+        })
+        fetched()
+    } catch (error) {
+        console.log(error);
+    }
+}
+  fetched()
+
+
+   let main=document.getElementById("cardwraper")
+   async function fetched (){
+      try {
+        let req= await fetch(`${api}`);
+        let res= await req.json();
+        console.log(res)
+        display(res);
+        // console.log(res)
+      } catch (error) {
+        console.log(error)
+      }
+   }
+   
+  function display(data){
+    let carditem=`
+    <div id="product">
+      ${data.
+        map((ele)=>
+        getcard(
+          ele.id,
+          ele.img,
+          ele.name,
+          ele.category,
+          ele.price,
+          ele.discount
+        )
+     
+      )
+    .join("")}
+    
+  </div>`
+    main.innerHTML=carditem;
+    
+    addtoCard()
+    editCard()
+  }
+ function getcard(id,img,name,category,price,discount){
+  card=`
+<div class="card" >
+  <div class="container" data-id=${id}>
+  <img src=${img} alt="" />
+</div>
+ <div class="info">
+   <h4>${name}</h4>
+   <p>Id:- ${id}</p>
+   <p class="category">${category}</p>
+    <p class="price">₹ ${price}</p>
+  <p class="discount"> ${discount}% Off</p>
+  <div id="editbtn">
+  <button class="delete"  data-id=${id} >Delete</button>
+  <button class="edit" id="edit" data-id=${id}>Edit</button>
+</div>
+ </div>
+</div>`
+ return card;
+ }
+
+
+ function addtoCard(){
+  let btn=document.querySelectorAll(".delete");
+ 
+ 
+  for(let link of btn){
+    link.addEventListener("click",deletebtn)
+  }
+  
+   async function deletebtn(e){
+    e.preventDefault()
+    let iD=e.target.dataset.id
+    try {
+        let res= await fetch(`https://63f5b30259c944921f64b2be.mockapi.io/products/${iD}`,{
+        method:"DELETE",
+        headers:{
+            'Content-Type' : 'application/json' 
+        },
+        body:JSON.stringify({id:iD})
+      })
+      console.log(res)
+      if(res.ok===true){
+        fetched() 
+      }
+      fetched() 
+    } catch (error) {
+        console.log(error)
+    }  
+    }   
+}
+function editCard(){
+  let links=document.querySelectorAll(".edit");
+  for(let link of links ){
+    link.addEventListener("click",edit)
+  }
+   async function edit(e){
+      e.preventDefault()
+      console.log(e)
+      let id=e.target.dataset.id
+      let res= await fetch(`https://63f5b30259c944921f64b2be.mockapi.io/products/${id}`)
+      let data=await res.json();
+      updateId.value=id;
+      updatName.value=data.name;
+      updateCategory.value=data.category;
+      updateImg.value=data.img;
+      updatePrice.value=data.price
+      updateDisc.value=data.discount
+    }
+}
+
+</script>
+</html>
