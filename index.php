@@ -21,6 +21,17 @@ include ('connection.php') ?>
     <a href="#">Find a Studio</a>
    </div>
    <div href="#" id="nav-right">
+
+   <?php
+session_start(); // Start session
+
+// Check if the user is logged in
+if (isset($_GET['username'])) {
+    $username = $_GET['username']; // Retrieve username from URL parameter
+    echo "Welcome, $username!";
+}
+?>
+
     <a href="#">Enter pincode
         <img id="edit_1" src="https://img.icons8.com/external-anggara-basic-outline-anggara-putra/24/external-edit-basic-ui-anggara-basic-outline-anggara-putra.png" alt="">
     </a>
@@ -41,7 +52,7 @@ include ('connection.php') ?>
     </div>
     <div id="images">
         <a href="#"><img src="https://img.icons8.com/external-vectorslab-flat-vectorslab/53/external-Help-Chat-customer-support-vectorslab-flat-vectorslab-2.png" alt="error"></a>
-        <a href="./login.html"><img src="https://img.icons8.com/material-sharp/256/user.png" alt="error"></a>
+        <a href="./login.php"><img src="https://img.icons8.com/material-sharp/256/user.png" alt="error"></a>
         <a href="#"><img src="https://img.icons8.com/ios/256/like.png" alt="error"></a>
         <a href="./card.php"><img src="https://img.icons8.com/external-smashingstocks-detailed-outline-smashing-stocks/256/external-Add-To-Cart-mobile-shopping-smashingstocks-detailed-outline-smashing-stocks-4.png" alt="error"></a>
     </div>
@@ -1253,6 +1264,7 @@ include ('connection.php') ?>
         </div>
     </div>
 </div>
+
 </body>
 <script>
     let counter=1;

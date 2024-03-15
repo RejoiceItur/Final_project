@@ -29,20 +29,60 @@
                 <div class="loginPage">
                     <h1 id="timeBar">&times</h1>
                     <div class="userPanel">
-                        <h3><a href="login.html">Login</a></h3>
-                        <h3 id="signup"><a href="signup.html">Signup</a></h3>
+                        <h3><a href="login.php">Login</a></h3>
+                        <h3 id="signup"><a href="signup.php">Signup</a></h3>
                     </div>
-                    <form action="" id="loginForm" onsubmit="formSubmit(event)">
+                    <form action="signup.php" id="loginForm" method="post">
                         <label for="name">Full Name</label>
                         <input type="text" name="fullname" id="name" placeholder="Enter Your Full Name" required>
                         <label for="mobile">Mobile Number</label>
                         <input type="text" name="mobile" id="mobileNo" placeholder="Enter 10 digit no." required>
                         <label for="password">Password</label>
-                        <input type="password" id="password" placeholder="Enter Password" autocomplete="on" required>
+                        <input type="password" id="password" name="password" placeholder="Enter Password" autocomplete="on" required>
                         <label for="password">Re-Enter Password</label>
                         <input type="password" id="rePassword" placeholder="Re-Enter Password" autocomplete="on" required>
                         <a href="./index.html"><button id="btn">Sign Up</button></a>
                     </form>
+
+<?php
+// Database connection parameters
+$host = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'final_proj';
+
+// Create a database connection
+$conn = new mysqli($host, $username, $password, $database);
+
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Retrieve form data
+$fullname = $_POST['fullname'];
+$mobile = $_POST['mobile'];
+$password = $_POST['password'];
+// $rePassword = $_POST['rePassword'];
+
+// You may want to add additional validation for the form data here
+
+// Insert data into the database
+$sql = "INSERT INTO users (fullname, mobile, password) VALUES ('$fullname', '$mobile', '$password')";
+
+if ($conn->query($sql) === TRUE) {
+    // echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+// Close the database connection
+$conn->close();
+?>
+
+
+
+
                     <div class="lines">
                         <div class="oneline"></div>
                         <p id="or">or</p>

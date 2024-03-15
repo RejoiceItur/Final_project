@@ -32,18 +32,21 @@
                     <h1 id="timeBar">&times</h1>
                     <div class="userPanel">
                         <h3 id="loginH3"><a href="./login.html">Login</a></h3>
-                        <h3 id="signup"><a class="singup" href="./signup.html">Signup</a></h3>
+                        <h3 id="signup"><a class="singup" href="./signup.php">Signup</a></h3>
                         <div class="animation hover"></div>
                     </div>
-                    <form action="" id="loginForm">
+                    <form action="login_php.php" id="loginForm" method="post">
                         <label for="mobile">Mobile Number</label>
                         <input type="text" name="mobile" id="mobileNo" placeholder="Enter Mobile Number" required>
                         <label for="password">Password</label>
                         <input type="password" name="password" id="password" placeholder="Enter Password">
                         <a href="#" class="passwordForget">Forget Password</a>
                         <!-- <a href="#" class="passwordForget">Login Password</a> -->
-                        <button id="btn"><a href="./index.html" id="home">Login</a></button>
+                        <input type="submit" value="Login">
+                        <!-- <button id="btn"><a href="./index.html" id="home">Login</a></button> -->
                     </form>
+
+
                     <div class="lines">
                         <div class="oneline"></div>
                         <p id="or">or</p>
