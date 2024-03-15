@@ -162,8 +162,8 @@ img {
   background-color: black;
 }
 #emptyCart {
-  max-width: 400px;
-  margin: 60px auto;
+  max-width: 100%;
+  margin: 0px auto;
 }
 #emptyCart > img {
   width: 100%;
@@ -219,6 +219,26 @@ img {
   justify-content: center;
   align-items: center;
 }
+
+
+.product-container {
+  display: flex; /* Align items horizontally */
+  align-items: flex-start; /* Align items at the start of the flex container */
+  justify-content: space-between; /* Add space between the items */
+}
+
+.product-details {
+  flex: 1; /* Take up remaining space */
+}
+
+.contact-button {
+  margin-top: 10px; /* Add margin to separate from the product details */
+}
+
+
+
+
+
 .qunt{
   display: block;
   width: 45px;

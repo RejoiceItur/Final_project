@@ -113,7 +113,8 @@
       if ($conn->connect_error) {
           die("Connection failed: " . $conn->connect_error);
       }
-      // SQL query to fetch all products with image paths
+      
+      //SQL query to fetch all products with image paths
       $sql = "SELECT * FROM items";
       $result = $conn->query($sql);
 
@@ -141,6 +142,7 @@
           echo '</div>';
           echo '</div>';
       }
+
 
 ?>
 

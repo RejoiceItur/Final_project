@@ -67,14 +67,7 @@
   </div>  
     <!-- Your existing HTML code -->
 
-    <div id="emptyCart">
-        <img src="https://www.rentomojo.com/public/images/error/no-cart.png" alt="" />
-        <h1>No Items in Cart</h1>
-        <p>
-            Add a few items to your cart and come back here for an express checkout process!
-        </p>
-        <div><button id="emptbtn"><a href="./product.php"> Browse catalogue</a></button></div>
-    </div>
+    
 
     <div id="cart">
         <?php
@@ -94,6 +87,14 @@
           die("Connection failed: " . $conn->connect_error);
       }
 
+
+      session_start(); // Start session
+
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id']; // Retrieve user ID from session
+
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if product_id is set in the POST request
     if (isset($_POST["product_id"])) {
@@ -106,19 +107,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Display details of the selected product
         if ($result->num_rows > 0) {
             $selectedProduct = $result->fetch_assoc();
-            echo '<div>';
-            echo '<h2>' . $selectedProduct['name'] . '</h2>';
-            echo '<img src="' . $selectedProduct['image_path'] . '" alt="' . $selectedProduct['name'] . '">';
-            echo '<p><strong>Seller name:</strong> ' . $selectedProduct['seller_name'] . '</p>';
-            echo '<p><strong>Description:</strong> ' . $selectedProduct['description'] . '</p>';
-            echo '<p><strong>Price:</strong> $' . $selectedProduct['price'] . '</p>';
-            // echo '<label for="quantity_' . $selectedProduct['id'] . '">Quantity:</label>';
-            //      echo '<input type="number" id="quantity_' . $selectedProduct['id'] . '" name="quantity_' . $selectedProduct['id'] . '" value="1" min="1">';
-                // echo '<button onclick="addToCart(' . $selectedProduct['id'] . ')">Update Cart</button>';
-                // echo '<button onclick="removeFromCart(' . $selectedProduct['id'] . ')">Remove from Cart</button>';
-            echo '</div>';
-        }}} else {
-            echo '<p>Your cart is empty.</p>';
+            echo '<div class="product-container">';
+          echo '<div class="product-details">';
+          echo '<h2>' . $selectedProduct['name'] . '</h2>';
+          echo '<img src="' . $selectedProduct['image_path'] . '" alt="' . $selectedProduct['name'] . '">';
+          echo '<p><strong>Seller name:</strong> ' . $selectedProduct['seller_name'] . '</p>';
+          echo '<p><strong>Description:</strong> ' . $selectedProduct['description'] . '</p>';
+          echo '<p><strong>Price:</strong> $' . $selectedProduct['price'] . '</p>';
+          echo '</div>';
+          echo '<div class="contact-button">';
+          echo '<button>Contact</button>';
+          echo '</div>';
+          echo '</div>';
+
+        }}} 
+        
+      }
+        else {
+          echo '<div id="emptyCart">
+          <img src="https://www.rentomojo.com/public/images/error/no-cart.png" alt="" />
+          <h1>No Items in Cart</h1>
+          <p>
+              Add a few items to your cart and come back here for an express checkout process!
+          </p>
+          <div><button id="emptbtn"><a href="./product.php"> Browse catalogue</a></button></div>
+      </div>';
         }
 
         ?>
