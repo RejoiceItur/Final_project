@@ -15,7 +15,7 @@
     <div id="login">
         <div class="container">
             <div class="leftSidePopUp">
-                <div class="whySide">
+                <!-- <div class="whySide">
                     <h2>Why Sign Up?</h2>
                     <p><img src="https://img6.hkrtcdn.com/react/static/media/signupFlow/white-bg-tick.svg" alt="">Over 1.5 million satisfied
                         customers</p>
@@ -23,7 +23,7 @@
                         order</p>
                     <p><img src="https://img6.hkrtcdn.com/react/static/media/signupFlow/white-bg-tick.svg" alt="">Get personal fitness
                         expert advice</p>
-                </div>
+                </div> -->
             </div>
             <div class="rightSidePopUp">
                 <div class="loginPage">

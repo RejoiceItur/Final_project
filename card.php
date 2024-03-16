@@ -12,7 +12,7 @@
     </head>
 <body>
   <!-- <a href="./product.html">Product Page</a> -->
-  <div id="sticker">
+  <!-- <div id="sticker">
     <div class="navbar-1">
       <div id="nav-left">
        <a href="#">Sell on Pepperfry</a>   
@@ -26,7 +26,7 @@
        </a>
        <a href="#">Find Pepperfry Studio</a>
       </div>
-   </div>
+   </div> -->
   
     <div class="nav-middle">
       <div>
@@ -53,7 +53,7 @@
     </div>
   
     <div class="navbar-2">
-      <a href="#">Furniture</a>
+      <!-- <a href="#">Furniture</a>
       <a href="#">Home Decor</a>
       <a href="#">Lamps & Lighting</a>
       <a href="#">Kitchen & Dining</a>
@@ -62,7 +62,7 @@
       <a href="#">Appliances</a>
       <a href="#">Pets</a>
       <a href="#">Modular</a>
-      <a href="#">Gift Cards</a>
+      <a href="#">Gift Cards</a> -->
   </div>
   </div>  
     <!-- Your existing HTML code -->
@@ -137,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
     </div>
 
-  </body>
+    </body>
   <script>
     // let data=JSON.parse(localStorage.getItem("cart"))
     // console.log(data)

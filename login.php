@@ -15,7 +15,7 @@
     <div id="login">
         <div class="container">
             <div class="leftSidePopUp">
-                <div class="whySide">
+                <!-- <div class="whySide">
                     <h2>Why login?</h2>
                     <p> <img src="https://img6.hkrtcdn.com/react/static/media/signupFlow/white-bg-tick.svg" alt="">
                         Manage your orders</p>
@@ -25,7 +25,7 @@
                     <p><img src="https://img6.hkrtcdn.com/react/static/media/signupFlow/white-bg-tick.svg"
                             alt="">Personalized
                         Recommendations</p>
-                </div>
+                </div> -->
             </div>
             <div class="rightSidePopUp">
                 <div class="loginPage">
