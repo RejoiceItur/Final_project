@@ -5,13 +5,110 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <title>Products</title>
   <link rel="stylesheet" href="product.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap" rel="stylesheet">
 
+<style>
 
+
+
+/* CSS styles for search container */
+.search-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* CSS styles for search input */
+#search {
+    padding-right: 30px; /* Ensure space for the search icon */
+    width: 200px; /* Adjust width as needed */
+}
+
+/* CSS styles for search button */
+.search-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px 10px;
+    background-color: #ddd; /* Button background color */
+    border: none;
+    cursor: pointer;
+}
+
+/* CSS styles for search icon */
+.fa-search {
+    color: #555; /* Icon color */
+}
+
+/* CSS styles for product cards */
+.products-container {
+    display: flex;
+    margin-left: 0px;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the gap between cards as needed */
+}
+
+.card {
+    width: calc(33.33% - 20px); /* Adjust the width of each card as needed */
+    /* Add additional styling as per your design */
+}
+
+.container {
+    position: relative;
+    /* Add additional styling as per your design */
+}
+
+/* Add additional CSS styles for other elements as needed */
+
+
+
+#cardwraper{
+  margin-left: 0px;
+}
+
+.footer{
+  display: flex;
+    margin-left: 0px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+
+
+  
+/* pagination Style*/
+
+/* CSS styles for pagination */
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination-link {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #333;
+  background-color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-link:hover {
+  background-color: #f0f0f0;
+}
+</style>
 
 
 </head>
@@ -40,18 +137,28 @@
       </a>
     </div>
     <div id="searchbar">
-      <form>
-        <input type="text" placeholder="Your door to happiness opens with a search" id="search">
-        <img src="https://img.icons8.com/ios-glyphs/30/search--v1.png" alt="error">
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
+        <label for="search">Search Product:</label>
+        <div class="search-container">
+        <input type="text" id="search" name="search" placeholder="Enter product name">
+        <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+    </div>
       </form>
     </div>
+
+
+<!--  Search box php  -->
+
+   
+
+
     <div id="images">
       <a href="#"><img
           src="https://img.icons8.com/external-vectorslab-flat-vectorslab/53/external-Help-Chat-customer-support-vectorslab-flat-vectorslab-2.png"
           alt="error"></a>
-      <a href="./login.html"><img src="https://img.icons8.com/material-sharp/256/user.png" alt="error"></a>
+      <a href="./login.php"><img src="https://img.icons8.com/material-sharp/256/user.png" alt="error"></a>
       <a href="#"><img src="https://img.icons8.com/ios/256/like.png" alt="error"></a>
-      <a href="./card.html"><img
+      <a href="./card.php"><img
           src="https://img.icons8.com/external-smashingstocks-detailed-outline-smashing-stocks/256/external-Add-To-Cart-mobile-shopping-smashingstocks-detailed-outline-smashing-stocks-4.png"
           alt="error"></a>
     </div>
@@ -71,88 +178,99 @@
 </div>
 </div>
 <br><br><br>
-  <div id="mainpage">
-    <div id="filter">
-      <h3>Sort by</h4>
-        <input type="radio" id="desc" name="Sort" value="desc">
-        <label for="desc">High to low</label><br>
-        <input type="radio" id="asc" name="Sort" value="asc">
-        <label for="asc">Low to High</label><br>
-        <input type="radio" id="Normal" name="Sort" value="Normal">
-        <label for="Normal">Normal</label><br>
-        <br>
-        <hr>
-        <h3>Brand</h3>
-        <input type="radio" id="CasaCraft" name="brand" value="CasaCraft">
-        <label for="CasaCraft">CasaCraft </label><br>
-        <input type="radio" id="ARRA" name="brand" value="ARRA">
-        <label for="ARRA">ARRA</label><br>
-        <input type="radio" id="Chumbak" name="brand" value="Chumbak">
-        <label for="Chumbak">Chumbak</label><br>
-        <input type="radio" id="Woodsworth" name="brand" value="Woodsworth">
-        <label for="Woodsworth">Woodsworth</label><br>
-        <input type="radio" id="DreamzzFurniture" name="brand" value="Dreamzz_Furniture">
-        <label for="Dreamzz_Furniture">Dreamz Furniture</label><br><br>
-        <hr>
-    </div>
+  
+    
+
     <div id="cardwraper">
       <!-- product should append here -->
+      <div class="products-container">
 
-
-      <?php
+<?php
 // Database connection parameters
-      $host = 'localhost';
-      $username = 'root';
-      $password = '';
-      $database = 'final_proj';
+$host = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'final_proj';
 
-      // Create a database connection
-      $conn = new mysqli($host, $username, $password, $database);
+// Create a database connection
+$conn = new mysqli($host, $username, $password, $database);
 
-      // Check the connection
-      if ($conn->connect_error) {
-          die("Connection failed: " . $conn->connect_error);
-      }
-      
-      //SQL query to fetch all products with image paths
-      $sql = "SELECT * FROM items";
-      $result = $conn->query($sql);
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
+// Pagination variables
+$limit = 6; // Number of products per page
+$page = isset($_GET['page']) ? $_GET['page'] : 1; // Current page, default is 1
+$start = ($page - 1) * $limit; // Offset for SQL query
 
-      // Display all products
-      while ($row = $result->fetch_assoc()) {
-          echo '<div class="card">';
-          echo '<div class="container">';
-          echo '<img src="' . $row['image_path'] . '" alt="' . $row['name'] . '">';
-          echo '<div class="overlay"></div>';
-          echo '<div data-id=${id} class="button"><a href="#" data-id=${id} class="btn">Add to Cart</a></div>';
-          echo '</div>';
-          echo '<div class="info">';
-          echo '<h2>' . $row['name'] . '</h2>';
-          echo '<p><strong>Description:</strong> ' . $row['description'] . '</p>';
-          echo '<p><strong>Price:</strong> $' . $row['price'] . '</p>';
+// Check if search query is provided
+if (isset($_GET['search'])) {
+    // Sanitize the search query to prevent SQL injection
+    $search = $conn->real_escape_string($_GET['search']);
 
+    // Query to count total products
+    $countQuery = "SELECT COUNT(*) as total FROM items WHERE name LIKE '%$search%'";
+    
+    // Query to fetch products based on product name with pagination
+    $sql = "SELECT * FROM items WHERE name LIKE '%$search%' LIMIT $start, $limit";
+} else {
+    // Query to count total products
+    $countQuery = "SELECT COUNT(*) as total FROM items";
 
-          echo '<div class="add-to-cart">';
-          echo '<form action="card.php" method="post">';
-          echo '<input type="hidden" name="product_id" value="' . $row['id'] . '">';
-          echo '<button type="submit">Add to Cart</button>';
-          echo '</form>';
-          echo '</div>';
-          echo '</div>';
-          echo '</div>';
-      }
+    // Query to fetch all products with pagination
+    $sql = "SELECT * FROM items LIMIT $start, $limit";
+}
 
+// Fetch total number of products
+$countResult = $conn->query($countQuery);
+$totalProducts = $countResult->fetch_assoc()['total'];
 
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Display products
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="card">';
+        echo '<div class="container">';
+        echo '<img src="' . $row['image_path'] . '" alt="' . $row['name'] . '">';
+        echo '</div>';
+        echo '<div class="info">';
+        echo '<h2>' . $row['name'] . '</h2>';
+        echo '<p><strong>Description:</strong> ' . $row['description'] . '</p>';
+        echo '<p><strong>Price:</strong> Rs.' . $row['price'] . '</p>';
+        echo '<div class="add-to-cart">';
+        echo '<form action="card.php" method="post">';
+        echo '<input type="hidden" name="product_id" value="' . $row['id'] . '">';
+        echo '<button type="submit">Add to Cart</button>';
+        echo '</form>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+    }
+} else {
+    echo "No products found matching your search.";
+}
+echo '</div>';
+
+// Pagination links
+$totalPages = ceil($totalProducts / $limit);
+// Pagination links with CSS styles
+echo '<div class="pagination">';
+for ($i = 1; $i <= $totalPages; $i++) {
+    echo '<a href="?page=' . $i . '" class="pagination-link">' . $i . '</a>';
+}
+echo '</div>';
+
+// Close the database connection
+$conn->close();
 ?>
 
     </div>
 
 
 
-  </div>
-  <div id="pagination">
-    <!-- all button of pagination -->
   </div>
   <br><br><br><br><br>
   <div class="footer">
@@ -249,78 +367,78 @@
 
 </body>
 <script>
-let api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-   let btns=0;
+// let api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
+//    let btns=0;
 
-async function countData(api){
-  let res = await fetch(`${api}`)
-  let data = await res.json()
-  btns=Math.ceil(data.length/12);
-  paginationButton(btns)
+// async function countData(api){
+//   let res = await fetch(`${api}`)
+//   let data = await res.json()
+//   btns=Math.ceil(data.length/12);
+//   paginationButton(btns)
   
-}
-// sortBy=price&order=asc forsorting
-const radioInputs = document.querySelectorAll('input[name="Sort"]');
-  radioInputs.forEach(radioInput => {
-    radioInput.addEventListener('change', function () {
-      // let api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-         if(this.value==="desc"){
-          api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-          api=`${api}sortBy=price&order=desc`
-          countData(api)
-          fetched(1,api)
-         }else if(this.value==="asc"){
-          api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-          api=`${api}sortBy=price&order=asc`
-          fetched(1,api)
-          countData(api)
-         }else{
-          api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-          fetched(1,api)
-          countData(api)
-         }
-    });
-  })
-  const radioa = document.querySelectorAll('input[name="brand"]');
-  radioa.forEach(radio => {
-    radio.addEventListener('change', function() {
-      let data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-         if(this.value==="CasaCraft"){
-          data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-           data=`${data}category=CasaCraft`
-          fetched(1,data)
-          countData(data)
-         }else if(this.value==="ARRA"){
-          data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-          data=`${data}category=ARRA`
-          fetched(1,data)
-          countData(data)
+// }
+// // sortBy=price&order=asc forsorting
+// const radioInputs = document.querySelectorAll('input[name="Sort"]');
+//   radioInputs.forEach(radioInput => {
+//     radioInput.addEventListener('change', function () {
+//       // let api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
+//          if(this.value==="desc"){
+//           api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
+//           api=`${api}sortBy=price&order=desc`
+//           countData(api)
+//           fetched(1,api)
+//          }else if(this.value==="asc"){
+//           api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
+//           api=`${api}sortBy=price&order=asc`
+//           fetched(1,api)
+//           countData(api)
+//          }else{
+//           api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
+//           fetched(1,api)
+//           countData(api)
+//          }
+//     });
+//   })
+//   const radioa = document.querySelectorAll('input[name="brand"]');
+//   radioa.forEach(radio => {
+//     radio.addEventListener('change', function() {
+//       let data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
+//          if(this.value==="CasaCraft"){
+//           data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
+//            data=`${data}category=CasaCraft`
+//           fetched(1,data)
+//           countData(data)
+//          }else if(this.value==="ARRA"){
+//           data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
+//           data=`${data}category=ARRA`
+//           fetched(1,data)
+//           countData(data)
           
-         }else if(this.value==="Chumbak"){
-          data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-          data=`${data}category=Chumbak`
-          fetched(1,data)
-          countData(data)
+//          }else if(this.value==="Chumbak"){
+//           data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
+//           data=`${data}category=Chumbak`
+//           fetched(1,data)
+//           countData(data)
           
-         }else if(this.value==="Woodsworth"){
-          data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-          data=`${data}category=Woodsworth`
-          fetched(1,data)
-          countData(data)
+//          }else if(this.value==="Woodsworth"){
+//           data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
+//           data=`${data}category=Woodsworth`
+//           fetched(1,data)
+//           countData(data)
           
-         }else if(this.value==="Dreamzz_Furniture"){
-          data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-          data=`${data}category=Dreamzz%20Furniture`
-          fetched(1,data)
-          countData(data)
-         }
-    });
-  })
-   countData(api)
-window.addEventListener("load",()=>{
+//          }else if(this.value==="Dreamzz_Furniture"){
+//           data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
+//           data=`${data}category=Dreamzz%20Furniture`
+//           fetched(1,data)
+//           countData(data)
+//          }
+//     });
+//   })
+//    countData(api)
+// window.addEventListener("load",()=>{
   
-  fetched(1,api)
-})
+//   fetched(1,api)
+// })
 
  /*  let main=document.getElementById("cardwraper")
    async function fetched (page=1,api){

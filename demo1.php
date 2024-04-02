@@ -14,21 +14,21 @@
     <form action="demo1.php" method="post" enctype="multipart/form-data">
     <div class="mb-3">
             <label for="product_name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="product_name" >
+            <input type="text" class="form-control" name="name">
         </div>
         <!-- <label for="product_name">Name:</label>
         <input type="text" id="name" name="name" required>
         <br> -->
         <div class="mb-3">
             <label for="product_name" class="form-label">Product Name</label>
-            <input type="text" class="form-control" id="product_name" >
+            <input type="text" class="form-control" name="product_name" >
         </div>
         <!-- <label for="product_name">Product Name:</label>
         <input type="text" id="product_name" name="product_name" required>
         <br> -->
         <div class="mb-3">
             <label for="price" class="form-label">Price</label>
-            <input type="text" class="form-control" id="price" >
+            <input type="text" class="form-control" name="price" >
         </div>
 
         <!-- <label for="price">Price:</label>
@@ -37,14 +37,19 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">Product description</label>
-            <textarea class="form-control" id="description" rows="3"></textarea>
+            <textarea class="form-control" name="description" rows="3"></textarea>
         </div>
         <!-- <label for="description">Description:</label>
         <textarea id="description" name="description" rows="4" required></textarea>
         <br> -->
 
+        <div class="mb-3">
+            <label for="mobile_no" class="form-label">Contact details</label>
+            <textarea class="form-control" name="mobile_no" ></textarea>
+        </div>
+
         <label for="image">Image:</label>
-        <input type="file" id="image" name="image" accept="image/*" required>
+        <input type="file" id="image" name="image" multiple accept="image/*" required>
         <br>
         <br>
         <div class="col-12">
@@ -75,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product_name = $_POST['product_name'];
     $price = $_POST['price'];
     $description = $_POST['description'];
+    $seller_contact = $_POST['mobile_no'];
 
     // Handle image upload
     $image_path = './assets/products/'; // Specify the directory where you want to store images
@@ -85,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     move_uploaded_file($image_tmp, $image_path);
 
     // Insert data into the database
-    $sql = "INSERT INTO items (seller_name,name, price, description, image_path) VALUES ('$name', '$product_name', $price, '$description', '$image_path')";
+    $sql = "INSERT INTO items (seller_name,name, price, description, image_path, seller_contact) VALUES ('$name', '$product_name', $price, '$description', '$image_path', '$seller_contact')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Product added successfully!";

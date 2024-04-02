@@ -12,7 +12,7 @@
     </head>
 <body>
   <!-- <a href="./product.html">Product Page</a> -->
-  <!-- <div id="sticker">
+  <div id="sticker">
     <div class="navbar-1">
       <div id="nav-left">
        <a href="#">Sell on Pepperfry</a>   
@@ -26,11 +26,11 @@
        </a>
        <a href="#">Find Pepperfry Studio</a>
       </div>
-   </div> -->
+   </div>
   
     <div class="nav-middle">
       <div>
-        <a href="./index.html">
+        <a href="./index.php">
           <img src="./images/logo new.png" alt="error">
         </a>
       </div>
@@ -44,16 +44,16 @@
         <a href="#"><img
             src="https://img.icons8.com/external-vectorslab-flat-vectorslab/53/external-Help-Chat-customer-support-vectorslab-flat-vectorslab-2.png"
             alt="error"></a>
-        <a href="./login.html"><img src="https://img.icons8.com/material-sharp/256/user.png" alt="error"></a>
+        <a href="./login.php"><img src="https://img.icons8.com/material-sharp/256/user.png" alt="error"></a>
         <a href="#"><img src="https://img.icons8.com/ios/256/like.png" alt="error"></a>
-        <a href="./card.html"><img
+        <a href="./card.php"><img
             src="https://img.icons8.com/external-smashingstocks-detailed-outline-smashing-stocks/256/external-Add-To-Cart-mobile-shopping-smashingstocks-detailed-outline-smashing-stocks-4.png"
             alt="error"></a>
       </div>
     </div>
   
     <div class="navbar-2">
-      <!-- <a href="#">Furniture</a>
+      <a href="#">Furniture</a>
       <a href="#">Home Decor</a>
       <a href="#">Lamps & Lighting</a>
       <a href="#">Kitchen & Dining</a>
@@ -62,7 +62,7 @@
       <a href="#">Appliances</a>
       <a href="#">Pets</a>
       <a href="#">Modular</a>
-      <a href="#">Gift Cards</a> -->
+      <a href="#">Gift Cards</a>
   </div>
   </div>  
     <!-- Your existing HTML code -->
@@ -70,7 +70,7 @@
     
 
     <div id="cart">
-        <?php
+    <?php
         // session_start();
 
         // Check if the cart is not empty
@@ -88,10 +88,10 @@
       }
 
 
-      session_start(); // Start session
+//       session_start(); // Start session
 
-if (isset($_SESSION['user_id'])) {
-    $userId = $_SESSION['user_id']; // Retrieve user ID from session
+// if (isset($_SESSION['user_id'])) {
+//     $userId = $_SESSION['user_id']; // Retrieve user ID from session
 
 
 
@@ -113,16 +113,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           echo '<img src="' . $selectedProduct['image_path'] . '" alt="' . $selectedProduct['name'] . '">';
           echo '<p><strong>Seller name:</strong> ' . $selectedProduct['seller_name'] . '</p>';
           echo '<p><strong>Description:</strong> ' . $selectedProduct['description'] . '</p>';
-          echo '<p><strong>Price:</strong> $' . $selectedProduct['price'] . '</p>';
+          echo '<p><strong>Price:</strong> Rs.' . $selectedProduct['price'] . '</p>';
+          echo '<p><strong>Mobile no:</strong> ' . $selectedProduct['seller_contact'] . '</p>';
           echo '</div>';
-          echo '<div class="contact-button">';
-          echo '<button>Contact</button>';
-          echo '</div>';
+          // echo '<div class="contact-button">';
+          // echo '<button>Contact</button>';
+          // echo '</div>';
           echo '</div>';
 
         }}} 
         
-      }
+    
         else {
           echo '<div id="emptyCart">
           <img src="https://www.rentomojo.com/public/images/error/no-cart.png" alt="" />
@@ -137,7 +138,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ?>
     </div>
 
-    </body>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // JavaScript to handle "Contact" button click event and make AJAX request
+$(document).ready(function() {
+    $(".contact-button button").click(function() {
+        // Get the product ID associated with the clicked button
+        var productId = $(this).closest('.product-container').data('id');
+
+        // Make AJAX request to get contact details
+        $.ajax({
+            url: 'get_contact_details.php', // URL of the server-side script
+            type: 'GET',
+            data: { product_id: productId }, // Pass the product ID as parameter
+            success: function(response) {
+                // Display the seller's contact details received from the server
+                alert("Seller Contact: " + response);
+            },
+            error: function(xhr, status, error) {
+                // Handle error if any
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+
+</script> -->
+
+  </body>
   <script>
     // let data=JSON.parse(localStorage.getItem("cart"))
     // console.log(data)

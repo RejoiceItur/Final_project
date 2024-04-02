@@ -25,9 +25,14 @@
                         // User authenticated successfully
                         $user = $result->fetch_assoc(); // Fetch user data
                         $username = $user['fullname']; // Assuming 'name' is the column name for the user's name
-    
-     // Redirect to index.php with username as a parameter
-     header("Location: index.php?username=" . urlencode($username));
+
+
+                         // Start session and store user ID
+                        session_start();
+                        $_SESSION['user_id'] = $user['id'];
+                        
+                        // Redirect to index.php with username as a parameter
+                        header("Location: index.php?username=" . urlencode($username));
 
                         // You can redirect the user to another page or perform other actions here
                     } else {
