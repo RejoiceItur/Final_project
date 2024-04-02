@@ -9,6 +9,82 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap" rel="stylesheet">
+
+
+    <style>
+    /* Style for the cart container */
+    #cart {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    /* Style for each product container */
+    .product-container {
+        width: 300px;
+        margin: 10px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Style for product image */
+    .product-container img {
+        width: 80%;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    /* Style for product details */
+    .product-details h2 {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .product-details p {
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    /* Style for empty cart message */
+    #emptyCart {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* Style for the empty cart image */
+    #emptyCart img {
+        width: 200px;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    /* Style for the empty cart button */
+    #emptyCart button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* Style for the empty cart button hover effect */
+    #emptyCart button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+
+
+
+
+
+
+
     </head>
 <body>
   <!-- <a href="./product.html">Product Page</a> -->

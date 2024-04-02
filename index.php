@@ -35,7 +35,7 @@ if (isset($_GET['username'])) {
     <a href="#">Enter pincode
         <img id="edit_1" src="https://img.icons8.com/external-anggara-basic-outline-anggara-putra/24/external-edit-basic-ui-anggara-basic-outline-anggara-putra.png" alt="">
     </a>
-    <a href="#">Find Pepperfry Studio</a>
+    <a href="addproduct.php">Find Pepperfry Studio</a>
    </div>
 </div>
 <div class="nav-middle">
