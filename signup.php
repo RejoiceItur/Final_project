@@ -6,10 +6,188 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pepperfry SignUp </title>
-    <link rel="website icon" type="png"
+    <link rel="icon" type="png"
      href="./images/wesiteIcon.jpeg">
+     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100&family=Source+Sans+Pro:ital,wght@0,300;0,400;1,200;1,300&display=swap');
+
+    /* pooja css -1sr */
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+    }
+
+
+    #login {
+        background-image: url('assets/products/background_img.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: 84vh;
+        background-attachment: fixed;
+        padding: 5% 0px;
+        margin: auto;
+    }
+
+    #login .container {
+        width: 700px;
+        height: 600px;
+        background-color: burlywood;
+        margin-left: 250px;
+        position: fixed;
+        display: flex;
+    }
+
+    .leftSidePopUp {
+        width: 250px;
+        background-image: linear-gradient(to bottom right, rgb(216, 102, 27), white);
+        /* background-image: linear-gradient(to bottom right, rgb(252, 0, 0), rgb(190, 172, 172)); */
+        padding: 1rem;
+
+    }
+
+    .leftSidePopUp .whySide {
+        margin: 10px 5px;
+        color: whitesmoke;
+    }
+
+    .leftSidePopUp .whySide h2 {
+        margin: 15px 10px;
+        font-size: 24px;
+        font-weight: 400;
+
+    }
+
+    .leftSidePopUp .whySide p {
+        margin: 10px 10px;
+        font-size: 17px;
+    }
+
+        .rightSidePopUp {
+        background-color: #f7f7f7;
+        width: 450px;
+
+    }
+
+    .rightSidePopUp .loginPage {
+        margin: 10px 5px;
+    }
+
+    .rightSidePopUp .loginPage h1 {
+        float: right;
+    }
+
+    .rightSidePopUp .loginPage #timeBar {
+        cursor: pointer;
+        color: rgb(216, 102, 27);
+
+    }
+
+    .rightSidePopUp .loginPage .userPanel {
+        display: flex;
+        color: rgb(112, 109, 109);
+
+    }
+
+    .rightSidePopUp .loginPage h3 {
+        margin: 20px 10px;
+        font-size: 20px;
+    }
+
+    .rightSidePopUp .loginPage h3 a {
+        text-decoration: none;
+        color: rgb(216, 102, 27);
+    }
+
+.loginPage #signup a{
+border-bottom: 3px solid rgb(216, 102, 27);
+}
+
+    .rightSidePopUp .loginPage label {
+        margin: 5px 35px;
+        color: rgb(112, 109, 109);
+        font-size: 20px;
+    }
+
+    .rightSidePopUp .loginPage input {
+        width: 300px;
+        height: 25px;
+        margin: 3px 35px;
+        padding: 8px 20px;
+        outline: none;
+    }
+
+    .rightSidePopUp .loginPage #btn {
+        width: 343px;
+        height: 45px;
+        margin: 15px 35px;
+        text-transform: uppercase;
+        font-size: 20px;
+        background-color: rgb(216, 102, 27);
+        border: 1px solid rgb(216, 102, 27);
+        color: #f7f7f7;
+    }
+
+    .rightSidePopUp .loginPage #or {
+        margin: 0px 5px;
+        font-size: 20px;
+    }
+
+    .loginPage .lines {
+        margin: 3px 35px;
+        display: flex;
+        color: rgb(112, 109, 109);
+    }
+
+    .rightSidePopUp .loginPage .oneline {
+        border-bottom: 1px solid rgb(112, 109, 109);
+        width: 160px;
+        margin-bottom: 7px;
+    }
+
+    .rightSidePopUp .loginPage .twoline {
+        border-bottom: 1px solid rgb(112, 109, 109);
+        width: 160px;
+        margin-bottom: 7px;
+    }
+
+    .rightSidePopUp .loginPage #social {
+        border: 1px solid rgb(112, 109, 109);
+        padding: 8px 18px;
+        width: 80px;
+        margin: 0px 35px;
+        text-decoration: none;
+        color: rgb(112, 109, 109);
+    }
+
+
+
+    .socialink {
+        margin: 20px 0px;
+    }
+
+    .hr {
+        border-bottom: 1px solid rgb(112, 109, 109);
+        padding: 1px 0px;
+        margin: 10px 35px;
+
+    }
+
+    .rightSidePopUp .loginPage #pTaglast {
+        margin: 10px 35px;
+        padding: 10px 0px;
+        color: rgb(112, 109, 109);
+font-size: 15px;
+    }
+
+    #social img {
+        width: 15px;
+    }
+     </style>
 </head>
-<link rel="stylesheet" href="./src/signup.css">
+<!-- <link rel="stylesheet" href="./src/signup.css"> -->
 
 <body>
     <div id="login">
@@ -32,7 +210,7 @@
                         <h3><a href="login.php">Login</a></h3>
                         <h3 id="signup"><a href="signup.php">Signup</a></h3>
                     </div>
-                    <form action="signup.php" id="loginForm" method="post">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                         <label for="name">Full Name</label>
                         <input type="text" name="fullname" id="name" placeholder="Enter Your Full Name" required>
                         <label for="mobile">Mobile Number</label>
@@ -45,6 +223,10 @@
                     </form>
 
 <?php
+
+// Disable error reporting
+error_reporting(0);
+
 // Database connection parameters
 $host = 'localhost';
 $username = 'root';
@@ -71,7 +253,11 @@ $password = $_POST['password'];
 $sql = "INSERT INTO users (fullname, mobile, password) VALUES ('$fullname', '$mobile', '$password')";
 
 if ($conn->query($sql) === TRUE) {
-    // echo "New record created successfully";
+    // Insert a record into 'new_users' table for the added user
+    $last_id = $conn->insert_id;
+    $date_added = date("Y-m-d H:i:s");
+    $sql = "INSERT INTO new_users (user_id,username, date_added) VALUES ('$last_id','$fullname', '$date_added')";
+    $conn->query($sql); // Add record to 'new_users' table
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
@@ -103,3 +289,4 @@ $conn->close();
 
 </html>
 <script src="./script/signup.js"></script>
+

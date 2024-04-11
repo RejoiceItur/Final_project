@@ -47,7 +47,7 @@ $database = 'final_proj';
             echo '<div class="product">';
             echo '<img src="' . $row['image_path'] . '" alt="' . $row['name'] . '">';
             echo '<h3>' . $row['name'] . '</h3>';
-            echo '<p>Price: $' . $row['price'] . '</p>';
+            echo '<p>Price: Rs.' . $row['price'] . '</p>';
             echo '<p>Description: ' . $row['description'] . '</p>';
             echo '<p>Contact: ' . $row['seller_contact'] . '</p>';
             echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="post">';

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   
@@ -10,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <title>Products</title>
+  <title>Services</title>
   <link rel="stylesheet" href="product.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -117,23 +118,23 @@
   <div id="sticker">
   <div class="navbar-1">
     <div id="nav-left">
-     <a href="#">Sell on Pepperfry</a>   
-     <a href="#">Become a Franchisee</a>
-     <a href="#">Buy in Bulk</a>
-     <a href="#">Find a Studio</a>
+     <a href="addproduct.php">Sell on Marketplace</a>   
+     <a href="add_services.php">Add service</a>
+     <!-- <a href="#">Buy in Bulk</a>
+     <a href="#">Find a Studio</a> -->
     </div>
-    <div href="#" id="nav-right">
+    <!-- <div href="#" id="nav-right">
      <a href="#">Enter pincode
          <img id="edit_1" src="https://img.icons8.com/external-anggara-basic-outline-anggara-putra/24/external-edit-basic-ui-anggara-basic-outline-anggara-putra.png" alt="">
      </a>
      <a href="#">Find Pepperfry Studio</a>
-    </div>
+    </div> -->
  </div>
 
   <div class="nav-middle">
     <div>
-      <a href="./index.html">
-        <img src="./images/logo new.png" alt="error">
+      <a href="./index.php">
+      <img src="assets\products\logo1.png" alt="error" style="width:140px;height:80px;">
       </a>
     </div>
     <div id="searchbar">
@@ -153,29 +154,16 @@
 
 
     <div id="images">
-      <a href="#"><img
+      <!-- <a href="#"><img
           src="https://img.icons8.com/external-vectorslab-flat-vectorslab/53/external-Help-Chat-customer-support-vectorslab-flat-vectorslab-2.png"
           alt="error"></a>
-      <a href="./login.php"><img src="https://img.icons8.com/material-sharp/256/user.png" alt="error"></a>
-      <a href="#"><img src="https://img.icons8.com/ios/256/like.png" alt="error"></a>
-      <a href="./card.php"><img
+      <a href="./login.php"><img src="https://img.icons8.com/material-sharp/256/user.png" alt="error"></a> -->
+      <!-- <a href="#"><img src="https://img.icons8.com/ios/256/like.png" alt="error"></a> -->
+      <!-- <a href="./card.php"><img
           src="https://img.icons8.com/external-smashingstocks-detailed-outline-smashing-stocks/256/external-Add-To-Cart-mobile-shopping-smashingstocks-detailed-outline-smashing-stocks-4.png"
-          alt="error"></a>
+          alt="error"></a> -->
     </div>
   </div>
-
-  <div class="navbar-2">
-    <a href="#">Furniture</a>
-    <a href="#">Home Decor</a>
-    <a href="#">Lamps & Lighting</a>
-    <a href="#">Kitchen & Dining</a>
-    <a href="#">Furnishings</a>
-    <a href="#">Mattresses</a>
-    <a href="#">Appliances</a>
-    <a href="#">Pets</a>
-    <a href="#">Modular</a>
-    <a href="#">Gift Cards</a>
-</div>
 </div>
 <br><br><br>
   
@@ -186,6 +174,9 @@
       <div class="products-container">
 
 <?php
+// Disable error reporting
+error_reporting(0);
+session_start(); // Start session
 // Database connection parameters
 $host = 'localhost';
 $username = 'root';
@@ -201,36 +192,56 @@ if ($conn->connect_error) {
 }
 
 // Pagination variables
-$limit = 6; // Number of products per page
+$limit = 6; // Number of services per page
 $page = isset($_GET['page']) ? $_GET['page'] : 1; // Current page, default is 1
 $start = ($page - 1) * $limit; // Offset for SQL query
+
+// Initialize search query
+$searchQuery = "";
 
 // Check if search query is provided
 if (isset($_GET['search'])) {
     // Sanitize the search query to prevent SQL injection
     $search = $conn->real_escape_string($_GET['search']);
-
-    // Query to count total products
-    $countQuery = "SELECT COUNT(*) as total FROM items WHERE name LIKE '%$search%'";
     
-    // Query to fetch products based on product name with pagination
-    $sql = "SELECT * FROM items WHERE name LIKE '%$search%' LIMIT $start, $limit";
-} else {
-    // Query to count total products
-    $countQuery = "SELECT COUNT(*) as total FROM items";
-
-    // Query to fetch all products with pagination
-    $sql = "SELECT * FROM items LIMIT $start, $limit";
+    // Append search condition to SQL query
+    $searchQuery = " WHERE name LIKE '%$search%' OR service_name LIKE '%$search%' OR tagline LIKE '%$search%' OR location LIKE '%$search%' OR mobile_no LIKE '%$search%'";
 }
 
-// Fetch total number of products
+// Query to count total services
+$countQuery = "SELECT COUNT(*) as total FROM services" . $searchQuery;
+
+// Query to fetch services with pagination and search
+$sql = "SELECT * FROM services" . $searchQuery . " LIMIT $start, $limit";
+
+// Fetch total number of services
 $countResult = $conn->query($countQuery);
-$totalProducts = $countResult->fetch_assoc()['total'];
+if (!$countResult) {
+    die("Error counting services: " . $conn->error);
+}
+$totalServices = $countResult->fetch_assoc()['total'];
 
 $result = $conn->query($sql);
 
+if (!$result) {
+    die("Error executing query: " . $conn->error);
+}
+
+// Check if the user is logged in
+if (isset($_SESSION['username'])) {
+    // User is logged in, set session variables or perform any other actions
+    // For example:
+    $username = $_SESSION['username'];
+    // You can use $username to personalize content or perform any other actions based on the user's session
+} else {
+    // User is not logged in, handle the case accordingly
+    // For example, you can redirect the user to the login page
+    // header("Location: login.php");
+    // exit();
+}
+
 if ($result->num_rows > 0) {
-    // Display products
+    // Display services
     while ($row = $result->fetch_assoc()) {
         echo '<div class="card">';
         echo '<div class="container">';
@@ -238,34 +249,40 @@ if ($result->num_rows > 0) {
         echo '</div>';
         echo '<div class="info">';
         echo '<h2>' . $row['name'] . '</h2>';
-        echo '<p><strong>Description:</strong> ' . $row['description'] . '</p>';
-        echo '<p><strong>Price:</strong> Rs.' . $row['price'] . '</p>';
+        echo '<h2>' . $row['service_name'] . '</h2>';
+        echo '<p><strong>Experience:</strong> ' . $row['tagline'] . '</p>';
+        echo '<p><strong>Location:</strong> ' . $row['location'] . '</p>';
+        echo '<p><strong>Contact:</strong> ' . $row['mobile_no'] . '</p>';
         echo '<div class="add-to-cart">';
-        echo '<form action="card.php" method="post">';
-        echo '<input type="hidden" name="product_id" value="' . $row['id'] . '">';
-        echo '<button type="submit">Add to Cart</button>';
+        echo '<form action="card1.php" method="post">';
+        echo '<input type="hidden" name="service_id" value="' . $row['id'] . '">';
+        echo '<button type="submit">More info</button>';
         echo '</form>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
     }
 } else {
-    echo "No products found matching your search.";
+    echo "No services found matching your search.";
 }
-echo '</div>';
 
+echo '</div>';
 // Pagination links
-$totalPages = ceil($totalProducts / $limit);
+$totalPages = ceil($totalServices / $limit);
+
 // Pagination links with CSS styles
 echo '<div class="pagination">';
 for ($i = 1; $i <= $totalPages; $i++) {
-    echo '<a href="?page=' . $i . '" class="pagination-link">' . $i . '</a>';
+    // Check if 'search' parameter is set and include it in pagination links
+    $searchParam = isset($_GET['search']) ? '&search=' . urlencode($_GET['search']) : '';
+    echo '<a href="?page=' . $i . $searchParam . '" class="pagination-link">' . $i . '</a>';
 }
 echo '</div>';
 
 // Close the database connection
 $conn->close();
 ?>
+
 
     </div>
 
@@ -347,7 +364,7 @@ $conn->close();
         </div>
     </div>
     <hr>
-    <div class="ending">
+    <!-- <div class="ending">
         <div>
             
             <a href="#"><p>Buy In Bulk</p></a>
@@ -360,200 +377,12 @@ $conn->close();
             <a href="#"><p>Privacy Policy</p></a>
             <a href="#"><p>Your Data & Security</p></a>
             <a href="#"><p>Grievance Redressal</p></a>
-        </div>
+        </div> -->
     </div>
 </div>
 
 
 </body>
-<script>
-// let api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-//    let btns=0;
 
-// async function countData(api){
-//   let res = await fetch(`${api}`)
-//   let data = await res.json()
-//   btns=Math.ceil(data.length/12);
-//   paginationButton(btns)
-  
-// }
-// // sortBy=price&order=asc forsorting
-// const radioInputs = document.querySelectorAll('input[name="Sort"]');
-//   radioInputs.forEach(radioInput => {
-//     radioInput.addEventListener('change', function () {
-//       // let api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-//          if(this.value==="desc"){
-//           api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-//           api=`${api}sortBy=price&order=desc`
-//           countData(api)
-//           fetched(1,api)
-//          }else if(this.value==="asc"){
-//           api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-//           api=`${api}sortBy=price&order=asc`
-//           fetched(1,api)
-//           countData(api)
-//          }else{
-//           api=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-//           fetched(1,api)
-//           countData(api)
-//          }
-//     });
-//   })
-//   const radioa = document.querySelectorAll('input[name="brand"]');
-//   radioa.forEach(radio => {
-//     radio.addEventListener('change', function() {
-//       let data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-//          if(this.value==="CasaCraft"){
-//           data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-//            data=`${data}category=CasaCraft`
-//           fetched(1,data)
-//           countData(data)
-//          }else if(this.value==="ARRA"){
-//           data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-//           data=`${data}category=ARRA`
-//           fetched(1,data)
-//           countData(data)
-          
-//          }else if(this.value==="Chumbak"){
-//           data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-//           data=`${data}category=Chumbak`
-//           fetched(1,data)
-//           countData(data)
-          
-//          }else if(this.value==="Woodsworth"){
-//           data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-//           data=`${data}category=Woodsworth`
-//           fetched(1,data)
-//           countData(data)
-          
-//          }else if(this.value==="Dreamzz_Furniture"){
-//           data=`https://63f5b30259c944921f64b2be.mockapi.io/products?`
-//           data=`${data}category=Dreamzz%20Furniture`
-//           fetched(1,data)
-//           countData(data)
-//          }
-//     });
-//   })
-//    countData(api)
-// window.addEventListener("load",()=>{
-  
-//   fetched(1,api)
-// })
-
- /*  let main=document.getElementById("cardwraper")
-   async function fetched (page=1,api){
-      try {
-        let req= await fetch(`${api}&page=${page}&limit=12`);
-        let res= await req.json();
-
-        display(res);
-        // console.log(res)
-      } catch (error) {
-        console.log(error)
-      }
-   }
-   
-   let pagebtn=document.getElementById("pagination")
-   function paginationButton(page){
-    let btn=[];
-    for(let i=1; i<=page; i++){
-      btn.push(`<button class="paginationBtn" data-page-number=${i}>${i}</button>`)
-    }
-    pagebtn.innerHTML=btn.join("");
-    const allButton=document.querySelectorAll("#pagination")
-    for( let btn of allButton){
-      btn.addEventListener("click",(e)=>{
-        e.preventDefault()
-        fetched(e.target.dataset.pageNumber,api)
-      })
-    }
-   }
-  function display(data){
-    let carditem=`
-    <div id="product">
-      ${data.
-        map((ele)=>
-        getcard(
-          ele.id,
-          ele.img,
-          ele.name,
-          ele.category,
-          ele.price,
-          ele.discount
-        )
-     
-      )
-    .join("")}
-    
-  </div>`
-    main.innerHTML=carditem;
-    
-    addtoCard()
-  }
- function getcard(id,img,name,category,price,discount){
-  card=`
-<div class="card" >
-  <div class="container" data-id=${id}>
-  <img src=${img} alt="" />
-  <div class="overlay"></div>
-   <div data-id=${id} class="button"><a href="#" data-id=${id} class="btn">Add to Cart</a></div>
- </div>
- <div class="info">
-   <h4>${name}</h4>
-   <p class="category">${category}</p>
-    <p class="price">₹ ${price}</p>
-  <p class="discount"> ${discount}% Off</p>
- </div>
-</div>`
- return card;
- }
-const data=JSON.parse(localStorage.getItem("cart"))||[];
- function addtoCard(){
-  let btn=document.querySelectorAll(".button");
- 
- 
-  for(let link of btn){
-    link.addEventListener("click",edit)
-  }
-  
-    function edit(e){
-    e.preventDefault()
-    let id=e.target.dataset.id
-      let res= fetch(`https://63f5b30259c944921f64b2be.mockapi.io/products/${id}`)
-      res.then((data)=>{
-        return data.json()
-      })
-      .then((ele)=>{
-        let obj={}
-        obj.quantity=1;
-        obj.name=ele.name,
-        obj.category=ele.category,
-        obj.img=ele.img,
-        obj.price=ele.price,
-        obj.discount=ele.discount,
-        obj.id=ele.id
-        if(checkduplicate(obj)){
-          data.push(obj)
-          localStorage.setItem("cart",JSON.stringify(data))
-            alert("Product added in cart")
-        }else{
-          alert("Product already in cart")
-        }
-        
-      }) 
-       
-    }
-    
-    
-}
-function checkduplicate(ele){
-  for(let i=0; i<data.length; i++){
-    if(data[i].name===ele.name){
-      return false
-    }
-  }
-  return true
-}              */
-</script>
 
 </html>
